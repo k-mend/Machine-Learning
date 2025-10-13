@@ -154,27 +154,7 @@ The solution includes proper data preparation:
 - Test different regularization strengths (C values)
 - Select optimal model
 
-## 📈 Expected Output
 
-```
-Q1 Answer - Mode of industry: [answer]
-Q2 Answer - Pair with biggest correlation: [feature1] and [feature2]
-Q3 Answer - Variable with biggest MI score: [answer]
-Q4 Answer - Validation Accuracy: [answer]
-Q5 Answer - Feature with smallest difference: [answer]
-Q6 Answer - Best C value: [answer]
-
-============================================================
-HOMEWORK ANSWERS SUMMARY
-============================================================
-Question 1: [answer]
-Question 2: [answer]
-Question 3: [answer]
-Question 4: [answer]
-Question 5: [answer]
-Question 6: [answer]
-============================================================
-```
 
 ## 📁 Project Structure
 
