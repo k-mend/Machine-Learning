@@ -3,15 +3,7 @@
 
 # In[3]:
 
-
-import pandas as pd
-import numpy as np
 import pickle
-from sklearn.feature_extraction import DictVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_auc_score
-from sklearn.model_selection import train_test_split
-
 
 from flask import Flask
 from flask import request
