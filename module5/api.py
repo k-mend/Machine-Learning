@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 import pickle
-
+import pandas as pd
 app = FastAPI()
 
 # Use pipeline_v1.bin instead
