@@ -18,7 +18,7 @@ sample_dict_api = {
 
 
 # URL of the running FastAPI endpoint
-url = "http://127.0.0.1:8002/predict_weather"
+url = "http://127.0.0.1:8003/predict_weather"
 
 # Send POST request
 response = requests.post(url, json=sample_dict_api)

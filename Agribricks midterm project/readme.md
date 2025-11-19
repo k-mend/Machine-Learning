@@ -14,7 +14,6 @@ This project uses **historical weather and crop data to build predictive models*
 Base URL: `https://power.larc.nasa.gov/api/temporal/daily/point`
 
 #### Parameters
-
 ```python
 # Historical date range for training
 START_DATE = "19930101"
@@ -26,10 +25,9 @@ END_DATE = "20251031"
 # RH2M - Relative Humidity at 2m (%)
 # ALLSKY_SFC_SW_DWN - All Sky Surface Shortwave Downward Irradiance (W/m²) - proxy for sunshine
 PARAMETERS = ["PRECTOTCORR", "T2M", "RH2M", "ALLSKY_SFC_SW_DWN"]
-````
+```
 
 #### Locations
-
 ```python
 LOCATIONS = {
     "highlands_humid_nyeri": {"name": "Nyeri (Highlands, Humid)", "latitude": -0.4167, "longitude": 36.9500},
@@ -89,32 +87,32 @@ FastAPI is chosen because it offers **high performance comparable to Node.js**, 
 ---
 
 ## Project Structure
-
 ```
 ├── app
-│   ├── main.py
-│   └── __pycache__
+│   ├── main.py
+│   └── __pycache__
 ├── data
-│   ├── cleaned_ecocrop.csv
-│   └── merged_aez_weather.csv
+│   ├── cleaned_ecocrop.csv
+│   └── merged_aez_weather.csv
 ├── Dockerfile
 ├── models
-│   ├── dict_vectorizer.pkl
-│   ├── ecocrop_df.pkl
-│   ├── rain_classifier.pkl
-│   └── rain_regressor.pkl
+│   ├── dict_vectorizer.pkl
+│   ├── ecocrop_df.pkl
+│   ├── rain_classifier.pkl
+│   └── rain_regressor.pkl
 ├── notebooks
-│   ├── anaconda_projects
-│   ├── tests
-│   └── training.ipynb
+│   ├── anaconda_projects
+│   ├── tests
+│   └── training.ipynb
 ├── readme.md
 ├── requirements.txt
 ├── Screenshots
-│   ├── Api running.png
-│   ├── Docker build.png
-│   ├── DOCKER RESPONSE.png
-│   ├── rainfall_probability_and _amount.png
-│   └── recommended_crops_response.png
+│   ├── Api running.png
+│   ├── Docker build.png
+│   ├── DOCKER RESPONSE.png
+│   ├── rainfall_probability_and _amount.png
+│   ├── recommended_crops_response.png
+│   └── weather_docker response.png
 └── venv
     ├── bin
     ├── include
@@ -132,7 +130,6 @@ FastAPI is chosen because it offers **high performance comparable to Node.js**, 
 * Docker (optional, for containerized deployment)
 
 **Python dependencies**:
-
 ```txt
 fastapi
 uvicorn
@@ -143,14 +140,12 @@ numpy
 ```
 
 Optional (for plotting in notebooks):
-
 ```txt
 matplotlib
 seaborn
 ```
 
 Install dependencies:
-
 ```bash
 pip install -r requirements.txt
 ```
@@ -160,7 +155,6 @@ pip install -r requirements.txt
 ## Setup and Installation
 
 1. Clone the repository:
-
 ```bash
 git clone https://github.com/k-mend/machine-learning.git
 cd 'machine learning'
@@ -175,12 +169,11 @@ cd 'Agribricks midterm project'
 * `ecocrop_df.pkl`
 
 3. (Optional) Run the FastAPI app locally:
-
 ```bash
 uvicorn app.main:app --reload
 ```
 
-![App Screenshot](Screenshots/Api running.png)
+![API Running Locally](Screenshots/Api%20running.png)
 
 The API will be available at: `http://127.0.0.1:8000`
 
@@ -189,20 +182,18 @@ The API will be available at: `http://127.0.0.1:8000`
 ## Running with Docker
 
 Build the Docker image:
-
 ```bash
 docker build -t crop-rain-api .
 ```
 
-![App Screenshot](Screenshots/Docker build.png)
+![Docker Build](Screenshots/Docker%20build.png)
 
 Run the container:
-
 ```bash
 docker run -d -p 8000:8000 crop-rain-api
 ```
 
-![App Screenshot](Screenshots/DOCKER RESPONSE.png)
+![Docker Running](Screenshots/DOCKER%20RESPONSE.png)
 
 The API will be accessible at: `http://localhost:8000`
 
@@ -216,7 +207,6 @@ The API will be accessible at: `http://localhost:8000`
 | `/recommend_crops` | POST   | Returns a list of crops suitable for given site temperature and rainfall. Input: `{"temperature": float, "rainfall": float}`                                 |
 
 **Example JSON for `/predict`**:
-
 ```json
 {
   "t2m": 25.0,
@@ -228,7 +218,6 @@ The API will be accessible at: `http://localhost:8000`
 ```
 
 **Example JSON for `/recommend_crops`**:
-
 ```json
 {
   "temperature": 25.0,
@@ -251,9 +240,9 @@ All models are pre-trained and saved in the `models/` folder.
 
 ## Usage Example
 
-1. Start the API (locally or via Docker).
-2. Send a POST request to `/predict`:
+### 1. Predicting Rain Probability and Precipitation
 
+Start the API (locally or via Docker), then send a POST request to `/predict`:
 ```bash
 curl -X POST "http://127.0.0.1:8000/predict" \
 -H "Content-Type: application/json" \
@@ -262,8 +251,7 @@ curl -X POST "http://127.0.0.1:8000/predict" \
 
 **Response:**
 
-![App Screenshot](Screenshots/rainfall_probability_and _amount.png)
-
+![Rain Prediction Response](Screenshots/rainfall_probability_and%20_amount.png)
 ```json
 {
   "rain_prob": 0.78,
@@ -271,8 +259,9 @@ curl -X POST "http://127.0.0.1:8000/predict" \
 }
 ```
 
-3. Send a POST request to `/recommend_crops`:
+### 2. Recommending Crops
 
+Send a POST request to `/recommend_crops`:
 ```bash
 curl -X POST "http://127.0.0.1:8000/recommend_crops" \
 -H "Content-Type: application/json" \
@@ -281,17 +270,34 @@ curl -X POST "http://127.0.0.1:8000/recommend_crops" \
 
 **Response:**
 
-![App Screenshot](Screenshots/recommended_crops_response.png)
-
+![Crop Recommendation Response](Screenshots/recommended_crops_response.png)
 ```json
 ["Maize", "Rice", "Soybean"]
 ```
+
+### 3. Testing with Python Script
+
+You can also test the API using a Python script:
+```python
+import requests
+
+url = "http://127.0.0.1:8000/predict"
+data = {
+    "t2m": 25.0,
+    "rh2m": 80.0,
+    "allsky_sfc_sw_dwn": 300.0,
+    "month": 6,
+    "aez": "AEZ1"
+}
+
+response = requests.post(url, json=data)
+print(response.json())
+```
+
+![Weather Docker Response](Screenshots/weather_docker%20response.png)
 
 ---
 
 ## License
 
 This project is licensed under MIT License.
-
-```
-
