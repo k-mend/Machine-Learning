@@ -298,6 +298,11 @@ print(response.json())
 
 ---
 
+## Cloud Deployment
+This service has been deployed on Render 
+![Render deployment logs](Screenshots/render_runtime.png)
+
+
 ## License
 
 This project is licensed under MIT License.
