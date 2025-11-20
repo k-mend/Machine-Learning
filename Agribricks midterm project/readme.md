@@ -302,6 +302,8 @@ print(response.json())
 This service has been deployed on Render 
 ![Render deployment logs](Screenshots/render_runtime.png)
 
+Here is the link to whic the application is deployed but due to large size of the models i trained (over 428mb) render could not host my application so it was brought down. Here is the link for records [render link](https://machine-learning-eqrn.onrender.com/)
+
 
 ## License
 
